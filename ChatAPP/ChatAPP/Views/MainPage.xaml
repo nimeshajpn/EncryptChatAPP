@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatAPP.Views.MainPage"
+             xmlns:viewmodels="clr-namespace:ChatAPP.ViewModels" xmlns:model="clr-namespace:ChatAPP.Models"
+             x:DataType="viewmodels:MainViewModel"
+                Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             >
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="20,20,20,1">
+            <StackLayout >
+                <CollectionView   
+                                ItemsSource="{Binding msgList}"
+                               
+                       
+                                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Message">
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Grid Padding="3"  >
+                                        <StackLayout  Margin="0,0,0,0"  >
+                                            <Frame Padding="20" CornerRadius="20"  BorderColor="Aqua" WidthRequest="30" HeightRequest="40" BackgroundColor="AntiqueWhite" >
+                                                <StackLayout Padding="2"  HeightRequest="250">
+                                                    <Label  Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
+                                                    <Label HorizontalOptions="Center" FontSize="20" Text="{Binding Msg}" ></Label>
+                                                </StackLayout>
+                                                
+
+                                            </Frame>
+                                        </StackLayout>
+
+
+                                    </Grid>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Grid Padding="5" IsVisible="false"  >
+                                        <StackLayout  Margin="0,0,0,0"  >
+                                            <Frame CornerRadius="40" BorderColor="Aqua" WidthRequest="30" HeightRequest="20" BackgroundColor="AliceBlue">
+
+                                                <Label Text="{Binding }" ></Label>
+
+                                            </Frame>
+                                        </StackLayout>
+
+
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" Margin="0,10,0,10">
+                <Frame   CornerRadius="10" BorderColor="Aqua"  HorizontalOptions="FillAndExpand" HeightRequest="70" Padding="10">
+
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" >
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                            <Frame CornerRadius="10"  BackgroundColor="AntiqueWhite" BorderColor="Aqua" HasShadow="True"  HorizontalOptions="FillAndExpand"  WidthRequest="200" Padding="10">
+
+                                <StackLayout >
+                                    <Editor  x:Name="MsgSender" Text="{Binding Msg}" Placeholder="Enter Message" HeightRequest="52" BackgroundColor="AntiqueWhite" HorizontalOptions="FillAndExpand" >
+                                        
+                                    </Editor>
+                                </StackLayout>
+                            </Frame>
+
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="EndAndExpand" WidthRequest="90"  VerticalOptions="Center">
+                            <Button Command="{Binding SendMethod}" Text="Send" CornerRadius="50"></Button>
+                       </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

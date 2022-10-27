@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:ChatAPP.ViewModels"
+             x:Class="ChatAPP.Views.RegistorPage">
+    <ContentPage.BindingContext>
+        <viewmodels:RegistorViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="Center">
+                <StackLayout Padding=" 26,0,26,0" Orientation="Vertical" HorizontalOptions="FillAndExpand" Margin="0,20,0,0" VerticalOptions="Center">
+                    <Frame HasShadow="True" Padding="10,2,10,2" CornerRadius="10">
+                        <Entry Text="{Binding UserName}" Placeholder="Username" HorizontalOptions="FillAndExpand"    TextColor="#707070"  ></Entry>
+                    </Frame>
+                    <Frame HasShadow="True"  Padding="10,2,10,2" CornerRadius="10" Margin="0,10,0,10">
+                        <Entry Text="{Binding Password}" Placeholder="Password" HorizontalOptions="FillAndExpand"    TextColor="#707070" IsPassword="True"  ></Entry>
+                    </Frame>
+                   
+                    <Button Command="{Binding RegistorCommandA }" Padding="10,2,10,2" HorizontalOptions="FillAndExpand"   CornerRadius=" 10" Text="Registor" TextColor="White" BackgroundColor="#00818A"></Button>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
