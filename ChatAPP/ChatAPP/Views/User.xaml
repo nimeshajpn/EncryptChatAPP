@@ -8,6 +8,10 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
