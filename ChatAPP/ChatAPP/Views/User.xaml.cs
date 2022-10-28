@@ -16,5 +16,10 @@ namespace ChatAPP.Views
         {
             InitializeComponent();
         }
+
+        private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

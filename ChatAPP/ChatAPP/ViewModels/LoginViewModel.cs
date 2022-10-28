@@ -33,7 +33,7 @@ namespace ChatAPP.ViewModels
 
             if (model.Password == Password) {
                 Preferences.Set("UserName",UserName);
-                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(User)}");
 
             }
 

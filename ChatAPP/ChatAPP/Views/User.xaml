@@ -1,18 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:ChatAPP.Models" xmlns:viewmodels="clr-namespace:ChatAPP.ViewModels"
              x:Class="ChatAPP.Views.User">
+    <ContentPage.BindingContext>
+        <viewmodels:UserViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" /><Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Vertical" Padding="20,20,20,1">
+                <StackLayout >
+                    <CollectionView   
+                                ItemsSource="{Binding users}"
+                                SelectedItem="{Binding Choice}"
+                                 SelectionChangedCommand="{Binding Selected}"
+                                 SelectionMode="Single"
+                                SelectionChanged="List_SelectionChanged"
+                               
+                               
+                       
+                                >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Users">
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                        <Grid Padding="3"  >
+                                            <StackLayout  Margin="0,0,0,0"  >
+                                                <Frame Padding="10" CornerRadius="10"  BorderColor="Transparent" WidthRequest="30" HeightRequest="40" BackgroundColor="#7EC8E3" >
+                                                    <StackLayout Padding="2"  HeightRequest="250">
+                                                        <Label HorizontalOptions="StartAndExpand" FontSize="25"  Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
+                                                        
+                                                    </StackLayout>
+
+
+                                                </Frame>
+                                            </StackLayout>
+
+
+                                        </Grid>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </StackLayout>
+               
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

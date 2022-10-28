@@ -1,5 +1,6 @@
 ﻿
 using ChatAPP.Models;
+using ChatAPP.Services;
 using Firebase.Database;
 using Firebase.Database.Query;
 
@@ -20,15 +21,17 @@ namespace Home_Task.Services
 
 
 
-
+        public Users userUpdate;
         public Users userget;
 
         FirebaseClient fr;
+        Encryption en = new Encryption();
        public List<Users> users = new List<Users>();
         public FirebaseService()
         {
             fr = new FirebaseClient("https://home-task-2ba21-default-rtdb.firebaseio.com/");
             userget = new Users();
+            userUpdate = new Users();
         }
 
 
@@ -72,7 +75,7 @@ namespace Home_Task.Services
         }
         public async Task<List<Users>> GetAll() {
 
-            return (await fr.Child("ChMsg").OnceAsync<Users>()).Select(item => new Users
+            return (await fr.Child("ChUsers").OnceAsync<Users>()).Select(item => new Users
             {
                Name = item.Object.Name,
            
@@ -120,6 +123,7 @@ namespace Home_Task.Services
                    Name=item.Object.Name,
                    Key = item.Object.Key,
                    Password = item.Object.Password,
+                   PublicKey = item.Object.PublicKey,
 
                 }).First();
 
@@ -134,7 +138,7 @@ namespace Home_Task.Services
                 _ = Application.Current.MainPage.DisplayAlert("Error", e.ToString(), "Ok");
             }
 
-            return null;
+            return userget;
 
         }
         public async Task<Message> GetByMsg(string UserName) {
@@ -170,13 +174,14 @@ namespace Home_Task.Services
            
         }
 
-        public async Task<bool> Update(string UserName,Users user)
+        public async Task<bool> UpdateUser(string UserName,Users user)
         {
 
 
-            var a = (await fr.Child("ChUser").OnceAsync<Users>()).Where(u => u.Object.Name == UserName).FirstOrDefault();
+           var a = (await fr.Child("ChUsers").OnceAsync<Users>()).Where(u => u.Object.Name == UserName).FirstOrDefault();
+           
 
-            await fr.Child("ChUser").Child(a.Key).PutAsync(JsonConvert.SerializeObject(user));
+            await fr.Child("ChUsers").Child(a.Key).PutAsync(JsonConvert.SerializeObject(user));
 
             return true;
         

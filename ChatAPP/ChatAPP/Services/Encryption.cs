@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
@@ -9,56 +11,67 @@ namespace ChatAPP.Services
 {
     public class Encryption
     {
+
         private static RSACryptoServiceProvider csp = new RSACryptoServiceProvider(2048);
         private static RSAParameters _privateKey;
-        private static RSAParameters _publicKey;
+        public static RSAParameters _publicKey;
+        
 
         public Encryption()
         {
-            _privateKey = csp.ExportParameters(false);
-            _publicKey=csp.ExportParameters(true);
+            _privateKey = csp.ExportParameters(true);
+            _publicKey=csp.ExportParameters(false);
             
         }
 
         public string GetPublicKey() 
         {
+
             var a = new StringWriter();
             var b = new XmlSerializer(typeof(RSAParameters));
             b.Serialize(a, _publicKey);
+             return a.ToString();
+
+
+        }
+        public RSAParameters GetPublic() {
+            return _publicKey;
         
-            return a.ToString();
-        }
-        public string SetPublicKey()
-        {
-
-
-
-
-            var a = new StringWriter();
-            var b = new XmlSerializer(typeof(RSAParameters));
-            b.Serialize(a, _publicKey);
-
-            //  return a.ToString();
-            return _publicKey.ToString();
         }
 
-        public string Encrypt(string Text) 
+        public string GetModulus()
         {
+            return _publicKey.Modulus.ToString(); ;
+
+        }
+        public string GetExponent()
+        {
+            return _publicKey.Exponent.ToString(); ;
+
+        }
+
+
+
+        public string Encrypt(string Text,RSAParameters publicKey) 
+        {
+            
+           
+
             csp = new RSACryptoServiceProvider();
-            csp.ImportParameters(_privateKey);
+            csp.ImportParameters(publicKey);
             var data = Encoding.Unicode.GetBytes(Text);
             var en = csp.Encrypt(data,false);
         
         return Convert.ToBase64String(en);
         }
 
-        public string Decrypt(string Text)
+        public string Decrypt(string Text )
         {
 
             try
             {
                 var data = Convert.FromBase64String(Text);
-                csp.ImportParameters(_publicKey);
+                csp.ImportParameters(_privateKey);
                 var en = csp.Decrypt(data, false);
 
 

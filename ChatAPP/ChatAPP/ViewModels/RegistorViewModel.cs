@@ -30,10 +30,11 @@ namespace ChatAPP.ViewModels
 
                 Name = UserName,
                 Password = Password,
-                Key=_key,
-                
-            
-            };
+                Key = _key,
+                PublicKey = en.GetPublic()
+
+
+        };
 
             var result =fr.CreateUser(model);
 
