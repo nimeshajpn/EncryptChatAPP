@@ -1,15 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:ChatAPP.Models" xmlns:viewmodels="clr-namespace:ChatAPP.ViewModels"
-             x:Class="ChatAPP.Views.User">
+             x:Class="ChatAPP.Views.User"
+              Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             >
     <ContentPage.BindingContext>
         <viewmodels:UserViewModel/>
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="#00818A" >
+
+                <Label Text="Chat APP" FontSize="30" TextColor="White" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+            </StackLayout>
             <StackLayout Orientation="Vertical" Padding="20,20,20,1">
                 <StackLayout >
+                    
+                    
                     <CollectionView   
                                 ItemsSource="{Binding users}"
                                 SelectedItem="{Binding Choice}"
@@ -25,11 +35,11 @@
 
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <StackLayout HorizontalOptions="FillAndExpand">
-                                        <Grid Padding="3"  >
+                                        <Grid Padding="1"  Margin="0,0,0,10">
                                             <StackLayout  Margin="0,0,0,0"  >
-                                                <Frame Padding="10" CornerRadius="10"  BorderColor="Transparent" WidthRequest="30" HeightRequest="40" BackgroundColor="#7EC8E3" >
+                                                <Frame Padding="15" CornerRadius="5"  BorderColor="Transparent" WidthRequest="30" HeightRequest="40" BackgroundColor="#00818A" >
                                                     <StackLayout Padding="2"  HeightRequest="250">
-                                                        <Label HorizontalOptions="StartAndExpand" FontSize="25"  Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
+                                                        <Label HorizontalOptions="StartAndExpand" FontSize="35"  TextColor="White" Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
                                                         
                                                     </StackLayout>
 

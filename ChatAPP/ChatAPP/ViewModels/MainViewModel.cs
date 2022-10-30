@@ -22,6 +22,7 @@ namespace ChatAPP.ViewModels
 
         public FirebaseService fr = new FirebaseService();
         public Encryption  en  = new Encryption();
+        public EncryptionS  ens  = new EncryptionS();
 
         public Users user;
         public MainViewModel()
@@ -57,8 +58,10 @@ namespace ChatAPP.ViewModels
         public DateTime date = DateTime.Now;
         public string Name;
         public string ReName;
-        public Boolean result;
-        public Boolean own;
+        public bool result;
+        public string visibility;
+        public string visibilityTwo;
+
         private bool _isBusy;
         public bool IsBusy
         {
@@ -72,11 +75,19 @@ namespace ChatAPP.ViewModels
                 OnPropertyChanged("IsBusy");
             }
         }
-        public Boolean Own
+        public string   Visibility
         {
 
-            get => own;
-            set => own = value;
+            get => visibility;
+            set => visibility = value;
+
+
+
+        }public string VisibilityTwo
+        {
+
+            get => visibilityTwo;
+            set => visibilityTwo = value;
 
 
 
@@ -95,10 +106,16 @@ namespace ChatAPP.ViewModels
         {
             user = await fr.GetById(ReName);
             string Date = DateTime.Now.ToString();
+
             
           
             string enmsg = en.Encrypt(Msg,user.PublicKey);
-            string endate = en.Encrypt(Date,user.PublicKey) ;
+            string endate = en.Encrypt(Date,user.PublicKey);
+
+            // symmetric
+            //  string enmsg = ens.Encrypt(Msg,ens.GetPrivate());
+            //  string endate = ens.Encrypt(Date,ens.GetPrivate());
+
             Message msg = new Message()
             {
 
@@ -123,14 +140,18 @@ namespace ChatAPP.ViewModels
 
 
             string _key = en.GetPublicKey();
+
+        
+
+
             user = await fr.GetById(Name);
             user.Name = Name;
             user.Key = _key;
             user.PublicKey = en.GetPublic();
-          
-            
-            _ = fr.UpdateUser(Name, user);
+            // symmetric
+            //   user.PublicKey = ens.GetPrivate();
 
+            _ = fr.UpdateUser(Name, user);
 
 
 
@@ -151,23 +172,55 @@ namespace ChatAPP.ViewModels
            
 
             
-            //RSAParameters rsap = new RSAParameters
-            //{
-            //    Modulus = Encoding.UTF8.GetBytes(Convert.ToBase64String(Encoding.UTF8.GetBytes(publicKey))),
-            //    Exponent = Encoding.UTF8.GetBytes(Convert.ToBase64String(Encoding.UTF8.GetBytes(exponant)))
-            //};
+            
             foreach (var msg in ab)
             {
-                    
-                     msg.Msg= en.Decrypt(msg.Msg);
-                msgList.Add(msg);
+                if (msg.Name==Name || msg.Name==ReName ) 
+                {
+                    msg.Msg = en.Decrypt(msg.Msg);
 
-                   
-               
-                
+                    // symmetric
+                 //   user = await fr.GetById(ReName);
+                 //   msg.Msg = ens.Decrypt(msg.Msg,user.PublicKey);
+
+
+
+                    msgList.Add(msg);
+
+                    if (msg.Name == Name)
+                    {
+                        msg.visibility = "true";
+                        msg.Revisibility = "false";
+
+
+
+                    }
+                    else
+                    {
+
+                        msg.visibility = "false";
+                        msg.Revisibility = "true";
+
+                    }
+
+
+                }
+
+
+
+
+
+
 
             }
-        }
-    }
+
+        } 
+
+
+
+
+
+
+         }
 
 }

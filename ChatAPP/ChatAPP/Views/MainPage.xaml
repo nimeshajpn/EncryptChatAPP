@@ -29,16 +29,16 @@
                        
                                 >
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Message">
+                            <DataTemplate  x:DataType="model:Message"  >
 
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <StackLayout HorizontalOptions="FillAndExpand">
-                                    <Grid Padding="3"  >
-                                        <StackLayout  Margin="0,0,0,0"  >
-                                            <Frame Padding="20" CornerRadius="20"  BorderColor="Aqua" WidthRequest="30" HeightRequest="40" BackgroundColor="AntiqueWhite" >
+                                        <Grid Padding="3" IsVisible="{Binding Revisibility}"  >
+                                            <StackLayout  Margin="0,0,0,0"  >
+                                                <Frame Padding="20" CornerRadius="20"  BorderColor="White" WidthRequest="30" HeightRequest="40" BackgroundColor="AntiqueWhite" >
                                                 <StackLayout Padding="2"  HeightRequest="250">
-                                                    <Label  Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
-                                                    <Label HorizontalOptions="Center" FontSize="20" Text="{Binding Msg}" ></Label>
+                                                        <Label x:DataType="model:Message" Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
+                                                        <Label x:DataType="model:Message" HorizontalOptions="Center" FontSize="20" Text="{Binding Msg}" ></Label>
                                                 </StackLayout>
                                                 
 
@@ -47,20 +47,24 @@
 
 
                                     </Grid>
+                                    
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="FillAndExpand">
-                                    <Grid Padding="5" IsVisible="false"  >
-                                        <StackLayout  Margin="0,0,0,0"  >
-                                            <Frame CornerRadius="40" BorderColor="Aqua" WidthRequest="30" HeightRequest="20" BackgroundColor="AliceBlue">
+                                        <Grid Padding="3" IsVisible="{Binding visibility }"  >
+                                            <StackLayout  Margin="0,0,0,0"  >
+                                                <Frame Padding="20" CornerRadius="20"  BorderColor="White" WidthRequest="30" HeightRequest="40" BackgroundColor="AntiqueWhite" >
+                                                    <StackLayout Padding="2"  HeightRequest="250">
+                                                        <Label  Margin="0" Text="{Binding Name}" FontAttributes="Bold" ></Label>
+                                                        <Label  x:DataType="model:Message" HorizontalOptions="Center" FontSize="20" Text="{Binding Msg}" ></Label>
+                                                    </StackLayout>
 
-                                                <Label Text="{Binding }" ></Label>
 
-                                            </Frame>
-                                        </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
 
 
-                                    </Grid>
-                                </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
                             </StackLayout>
 
 

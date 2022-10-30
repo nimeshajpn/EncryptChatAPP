@@ -30,12 +30,25 @@ namespace ChatAPP.ViewModels
 
           model = await fr.GetById(UserName);
 
+            if(model.Password!= null)
+            {
+                if (model.Password == Password)
+                {
+                    Preferences.Set("UserName", UserName);
+                    await Shell.Current.GoToAsync($"//{nameof(User)}");
 
-            if (model.Password == Password) {
-                Preferences.Set("UserName",UserName);
-                await Shell.Current.GoToAsync($"//{nameof(User)}");
+
+                }
+                else {
+
+                    _ = Application.Current.MainPage.DisplayAlert("Error","Can not Login", "Ok");
+
+
+                }
 
             }
+
+           
 
 
 
